@@ -15,16 +15,12 @@ class MoviesController < ApplicationController
     end
 
     @sort = params[:sort] || session[:sort]
-    case @sort
-    when 'title'
-     @title_header = 'hilite'
-    when 'release_date'
-     @release_date_header = 'hilite'
+    if @sort == 'title'
+      @title_header = 'hilite'
+    else
+      @release_date_header = 'hilite'
     end
 
-    if @ratings == {}
-      Hash[@ratings.map {|rating| [rating, rating]}]
-    end
     
     if params[:sort] != session[:sort]
       session[:sort] = @sort
